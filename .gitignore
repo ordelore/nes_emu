@@ -1,0 +1,6 @@
+*.nes
+bin/*
+obj/*
+*.8xp
+*.8xv
+src/rom.h
