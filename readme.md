@@ -4,6 +4,14 @@ This is an attempt at writing an NES emulator for the TI-84+ CE using Agnes as a
 
 For now, this is not an attempt to write a fast emulator. Instead, this is an exercise in porting a piece of software to another platform.
 
+Nestest running on actual calculator hardware
+
+![image](https://i.imgur.com/dT2wAKSl.jpg)
+
+Screenshot from CEmu
+
+![image](https://user-images.githubusercontent.com/7295977/130182733-4de53cc0-309b-4db7-9475-976e76813435.png)
+
 ## Building
 
 Make sure you have the latest CE toolchain installed
