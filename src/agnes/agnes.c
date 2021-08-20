@@ -52,7 +52,6 @@ static agnes_color_t g_colors[64] = {
 
 agnes_t* agnes_make(void) {
     agnes_t *agnes = (agnes_t*)malloc(sizeof(*agnes));
-    dbg_sprintf(dbgout, "Malloc: %d bytes\n", sizeof(*agnes));
     if (!agnes) {
         return NULL;
     }
@@ -65,7 +64,6 @@ bool agnes_load_ines_data(agnes_t *agnes, void *data, size_t data_size) {
     if (data_size < sizeof(ines_header_t)) {
         return false;
     }
-
     ines_header_t *header = (ines_header_t*)data;
     if (strncmp((char*)header->magic, "NES\x1a", 4) != 0) {
         return false;

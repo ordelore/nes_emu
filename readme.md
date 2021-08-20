@@ -11,16 +11,20 @@ Make sure you have the latest CE toolchain installed
 ### Windows
 
 On a command prompt, run `./conv_rom.bat <romfile_name>`
+
 And send all the .8x* files in the `/bin/` folder to your calculator
 
 ### OSX / Linux
 
 On a command prompt, run `./conv_rom.sh <romfile_name>`
+
 And send all the .8x* files in the `/bin/` folder to your calculator
 
 # Running
 
 On your calculator, run this file using your shell of choice or `Asm(prgmAGNECE)`
+
+As of right now, only one ROM can be stored on a calculator at once.
 
 # Licenses
 This repository is licensed under BSD-3

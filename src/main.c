@@ -4,11 +4,10 @@
 #include <graphx.h>
 #include <keypadc.h>
 #include <debug.h>
+#include <fileioc.h>
 
 #define AGNES_IMPLEMENTATION
 #include "agnes/agnes.h"
-
-#include "rom.h"
 
 #define WINDOW_WIDTH 320
 #define WINDOW_HEIGHT 240
@@ -16,16 +15,26 @@
 static void get_input(agnes_input_t *out_input);
 
 int main(void) {
-    
+
+    // initialize agnes
     agnes_t *agnes = agnes_make();
     uint8_t x_offset = (WINDOW_WIDTH / 2) - (AGNES_SCREEN_WIDTH / 2);
     if (agnes == NULL) {
         return 1;
     }
 
-    size_t ines_data_size = sizeof(ROM_IMAGE);
-    bool ok = agnes_load_ines_data(agnes, ROM_IMAGE, ines_data_size);
+    // load rom
+    ti_Close(3);
+    const ti_var_t fp = ti_Open("ROMIMG", "r");
+    if (!fp) {
+        ti_Close(fp);
+        return 1;
+    }
+    const size_t rom_size = ti_GetSize(fp);
+    unsigned char *file_contents = ti_GetDataPtr(fp);
+    bool ok = agnes_load_ines_data(agnes, file_contents, rom_size);
     if (!ok) {
+        ti_Close(fp);
         return 1;
     }
     
@@ -57,6 +66,7 @@ int main(void) {
         ok = agnes_next_frame(agnes);
         kb_Scan();
         if (!ok) {
+            ti_Close(fp);
             return 1;
         }
 
@@ -72,6 +82,7 @@ int main(void) {
         gfx_BlitBuffer();
     }
     agnes_destroy(agnes);
+    ti_Close(fp);
     gfx_End();
     return 0;
 }
